@@ -21,9 +21,9 @@ public abstract class Account implements IAccount {
     @Override
     public void withdraw(double value) {
         if (value > balance || LIMIT_WITHDRAW > 3) {
-            System.out.println(String.format("Saldo insuficiente!\nSaldo atual: R$%.2f", this.balance));
+            System.err.println(String.format("Saldo insuficiente!\nSaldo atual: R$%.2f", this.balance));
         } else if( numberWithdraw >= LIMIT_WITHDRAW) {
-            System.out.println("LImite de saques diarios atingido!");
+            System.err.println("LImite de saques diarios atingido!");
         } else {
             numberWithdraw++;
             balance -= value;
@@ -34,7 +34,7 @@ public abstract class Account implements IAccount {
     @Override
     public void deposit(double value) {
         if (value <= 0) {
-            System.out.println("Valor inválido para depósito!");
+            System.err.println("Valor inválido para depósito!");
         } else {
             balance += value;
             System.out.println("Deposito realizado com sucesso!");
@@ -44,7 +44,7 @@ public abstract class Account implements IAccount {
     @Override
     public void transfer(double value, IAccount destintioAccount) {
         if (value > balance) {
-            System.out.println("Saldo insuficiente para essa transacao!");
+            System.err.println("Saldo insuficiente para essa transacao!");
         } else {
             this.withdraw(value);
             destintioAccount.deposit(value);
